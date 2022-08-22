@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface WeatherAPI {
     @GET("forecast")
-    fun getForecast(@Query("q") city :String, @Query("appid") appid :String) : Call<ForecastResponse>
+    fun getForecast(@Query("q") city :String, @Query("appid") appid :String, @Query("units") unit :String) : Call<ForecastResponse>
 }

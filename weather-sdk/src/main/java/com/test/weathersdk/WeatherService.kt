@@ -7,14 +7,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class WeatherService {
-    private val moshi = Moshi.Builder()
+
+    val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    val retrofit = Retrofit.Builder()
+    var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    val api = retrofit.create(WeatherAPI::class.java)
+
+    val weatherAPIRequest: WeatherAPI? = retrofit.create(WeatherAPI::class.java)
 }
