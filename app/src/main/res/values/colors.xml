@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#ff6750a4</color>
+    <color name="colorOnPrimary">#ffffff</color>
+    <color name="colorPrimaryContainer">#ffeaddff</color>
+    <color name="colorOnPrimaryContainer">#ff21005d</color>
+    <color name="colorPrimaryInverse">#ffd0bcff</color>
+    <color name="colorSecondary">#ff625b71</color>
+    <color name="colorOnSecondary">#ffffff</color>
+    <color name="colorSecondaryContainer">#ffe8def8</color>
+    <color name="colorOnSecondaryContainer">#ff1d192b</color>
+    <color name="colorTertiary">#ff7d5260</color>
+    <color name="colorOnTertiary">#ffffff</color>
+    <color name="colorTertiaryContainer">#ffffd8e4</color>
+    <color name="colorOnTertiaryContainer">#ff31111d</color>
+
+
+    <color name="colorError">#ffb3261e</color>
+    <color name="colorOnError">#ffffff</color>
+    <color name="colorErrorContainer">#fff9dedc</color>
+    <color name="colorOnErrorContainer">#ff410e0b</color>
+    <color name="colorOutline">#ff79747e</color>
+    <color name="colorBackground">#fffffbfe</color>
+    <color name="colorOnBackground">#ff1c1b1f</color>
+    <color name="colorSurface">#fffffbfe</color>
+    <color name="colorOnSurface">#ff1c1b1f</color>
+    <color name="colorSurfaceVariant">#ffe7e0ec</color>
+    <color name="colorOnSurfaceVariant">#ff49454f</color>
+    <color name="colorSurfaceInverse">#ff313033</color>
+    <color name="colorOnSurfaceInverse">#fff4eff4</color>
+
 </resources>

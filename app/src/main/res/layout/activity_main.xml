@@ -7,79 +7,22 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/background_light"
         tools:context=".ui.MainActivity">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_title"
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current Weather"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </com.google.android.material.textview.MaterialTextView>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tl_location_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/my_nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:hint="@string/location_hint"
-            android:visibility="visible"
-            app:hintTextColor="#757575"
-            android:layout_margin="32dp"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_title">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_location_name"
-                style="@style/TextAppearance.AppCompat.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:maxLength="20">
-
-            </com.google.android.material.textfield.TextInputEditText>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mb_search"
-            style="@style/TextAppearance.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/btn_search_weather"
-            android:backgroundTint="@color/teal_200"
-            android:textColor="@color/teal_700"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tl_location_name">
-
-        </com.google.android.material.button.MaterialButton>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_result"
-            style="@style/TextAppearance.AppCompat.Body2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mb_search">
-
-        </com.google.android.material.textview.MaterialTextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_graph" />
+    </FrameLayout>
 </layout>

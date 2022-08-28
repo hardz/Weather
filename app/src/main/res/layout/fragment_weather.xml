@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.WeatherFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_title"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today's Weather"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_city_name"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mumbai"
+            android:drawableStart="@drawable/ic_location_24"
+            android:layout_marginStart="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_city_name">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_weather_type_icon"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_temp_of_city"
+                    style="@style/TextAppearance.Material3.DisplayLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="35\u00B0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_temp_of_city_des"
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="feels like 38\u00B0"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_temp_of_city">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_weather_type"
+                    style="@style/TextAppearance.Material3.TitleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="Heavy Rain"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_weather_des"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_weather_des"
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="Morning"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </com.google.android.material.textview.MaterialTextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
