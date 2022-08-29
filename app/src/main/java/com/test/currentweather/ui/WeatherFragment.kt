@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.test.currentweather.Constants
 import com.test.currentweather.R
 import com.test.currentweather.databinding.FragmentWeatherBinding
 import com.test.currentweather.viewmodels.ForecastViewModel
 import com.test.currentweather.viewmodels.WeatherViewModel
-import com.test.weathersdk.Constants
 import com.test.weathersdk.model.ForecastResponse
 import com.test.weathersdk.model.WeatherResponse
 
@@ -41,7 +41,7 @@ class WeatherFragment : Fragment() {
     }
 
     private fun getCurrentWeather(cityQuery: String) {
-        weatherViewModel.getCurrentWeather(cityQuery,Constants.API_KEY,Constants.TEMP_UNIT_METRIC)!!
+        weatherViewModel.getCurrentWeather(cityQuery, Constants.API_KEY,Constants.TEMP_UNIT_METRIC)!!
             .observe(viewLifecycleOwner, object : Observer<WeatherResponse?> {
             override fun onChanged(weatherResponse: WeatherResponse?) {
                 if (weatherResponse != null) {
