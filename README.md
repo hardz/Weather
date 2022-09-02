@@ -6,8 +6,8 @@ Current Weather is a small demo application based on modern Android tech-stacks 
 </br>
 
 <p align="center">
-<img src="/previews/preview_1.png" />
-<img src="/previews/preview_2.png" />
+<img src="/previews/preview_1.png" width="280" />
+<img src="/previews/preview_2.png" width="280" />
 </p>
 
 
