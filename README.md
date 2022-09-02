@@ -1,24 +1,49 @@
-# Current Weather using (MVVM)
+<h1 align="center">MovieCompose</h1>
 
-This codebase was created to demonstrate a Network Calling and Android Architechture and more.
+<p align="center">  
+Current Weather is a small demo application based on modern Android tech-stacks especially focus on Jetpack Compose UI using The Movie DB API. Also fetching data from the network and integrating persisted data in the database via repository pattern.
+</p>
+</br>
 
-See how a Weather App is built using Kotlin in Android to connect to https://openweathermap.org/current.
+<p align="center">
+<img src="/previews/preview2.png" />
+</p>
 
-Development
-This project has been developed with Android Studio
 
-Concepts
-This Weather app tries to show the following Android concepts:
+## How to build on your environment
+Add your [OpenWeather](https://openweathermap.org/)'s API key in local.properties file.
+```xml
+weather_api_key=YOUR_API_KEY
+```
 
-Kotlin Codebase
-MVVM (Model View ViewModel) Architecture
-LiveData
-Architecture
+<img src="/previews/preview0.gif" align="right" width="32%"/>
 
-There are two modules in the project
+## Tech stack & Open-source libraries
+- Minimum SDK level 21
+- 100% [Kotlin](https://kotlinlang.org/) based
+- JetPack
+  - ViewModel - UI related data holder, lifecycle aware.
+- Architecture
+  - MVVM Architecture (Declarative View - ViewModel - Model)
+  - Repository pattern
+- Material Design
+- [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs and paging network data.
 
-app - The main project module
-weather-sdk - The Network Call library.
 
-Testing
-implementated Unit Test to check wheather data for end-to-end test case
+# License
+```xml
+Designed and developed by 2021 hardz (Hardik Kubavat)
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+```
+

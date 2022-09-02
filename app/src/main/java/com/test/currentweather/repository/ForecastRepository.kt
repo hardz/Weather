@@ -29,4 +29,24 @@ class ForecastRepository {
         })
         return data
     }
+
+    fun getForecastbyGeoCode(lat :String, lon :String, appid :String, unit :String): MutableLiveData<ForecastResponse?>? {
+        val data: MutableLiveData<ForecastResponse?> = MutableLiveData<ForecastResponse?>()
+        WeatherService().weatherAPIRequest?.getForecastbyGeoCode(lat, lon, appid, unit)?.enqueue(object : Callback<ForecastResponse> {
+            override fun onResponse(
+                call: Call<ForecastResponse>,
+                response: Response<ForecastResponse>
+            ) {
+                if (response.body() != null) {
+                    data.setValue(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
+                data.setValue(null)
+            }
+
+        })
+        return data
+    }
 }

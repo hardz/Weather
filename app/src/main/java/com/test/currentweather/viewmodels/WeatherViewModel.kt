@@ -14,4 +14,11 @@ class WeatherViewModel : ViewModel(){
         }
         return weatherResponseLiveData
     }
+
+    fun getWeatherbyGeoCode(lat :String, lon: String, appid :String, unit :String): LiveData<WeatherResponse?>? {
+        if (weatherResponseLiveData == null) {
+            weatherResponseLiveData = WeatherRepository().getWeatherbyGeoCode(lat, lon, appid, unit)
+        }
+        return weatherResponseLiveData
+    }
 }
