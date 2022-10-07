@@ -1,7 +1,7 @@
 <h1 align="center">Current Weather</h1>
 
 <p align="center">  
-Current Weather is a small demo application based on modern Android tech-stacks especially focus on Jetpack Compose UI using The Movie DB API. Also fetching data from the network.
+Current Weather is a small demo application based on modern Android tech-stacks especially focus on Jetpack using The Movie DB API. Also fetching data from the network.
 </p>
 </br>
 
@@ -28,7 +28,7 @@ weather_api_key=YOUR_API_KEY
   - MVVM Architecture (Declarative View - ViewModel - Model)
   - Repository pattern
 - Material Design
-- [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs and paging network data.
+- [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs for network data.
 
 
 # License
