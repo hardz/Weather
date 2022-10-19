@@ -11,9 +11,12 @@ class Constants {
     Temperature in Kelvin is used by default, no need to use units parameter in API call*/
 
     companion object {
+
+        const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+
         const val API_KEY = BuildConfig.OPEN_WEATHER_API_KEY
 
-        const val TEMP_UNIT_IMPERIAL = "imperial" //Fahrenheit
+        const val TEMP_UNIT_IMPERIAL =  "imperial" //Fahrenheit
         const val TEMP_UNIT_METRIC = "metric" //Celsius
 
         const val UNIT_CELSIUS_SYMBOL = "\u2103"

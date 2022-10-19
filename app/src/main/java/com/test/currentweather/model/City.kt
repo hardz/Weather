@@ -1,4 +1,4 @@
-package com.test.weathersdk.model
+package com.test.currentweather.model
 
 
 import com.squareup.moshi.Json

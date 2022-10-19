@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Current Weather"
 include ':app'
-include ':weather-sdk'

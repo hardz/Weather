@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.test.currentweather.databinding.ItemDayForecastBinding
-import com.test.weathersdk.model.Forecast
+import com.test.currentweather.model.Forecast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -64,7 +64,7 @@ class DaysForecastAdapter(private val listener: ForecastAdapterListener) :
                 sdf.timeZone = TimeZone.getDefault()
                 return sdf.format(date)
             } catch (e: Exception) {
-                Log.e("DEBUG", "getFormattedDate", e)
+                Log.e("DEBUG", "Exception getFormattedDate - ", e)
             }
             return ""
         }

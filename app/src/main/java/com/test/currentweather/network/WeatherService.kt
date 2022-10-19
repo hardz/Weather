@@ -1,8 +1,8 @@
-package com.test.weathersdk
+package com.test.currentweather.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.test.weathersdk.Constants.Companion.BASE_URL
+import com.test.currentweather.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 

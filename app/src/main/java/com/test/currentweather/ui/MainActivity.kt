@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private val SPLASH_TIME_OUT = 1000L
     private var isKeepOn = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -27,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         }, SPLASH_TIME_OUT)
 
     }
-
-
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

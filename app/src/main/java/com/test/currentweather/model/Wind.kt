@@ -1,4 +1,4 @@
-package com.test.weathersdk.model
+package com.test.currentweather.model
 
 
 import com.squareup.moshi.Json
@@ -9,7 +9,7 @@ data class Wind(
     @Json(name = "deg")
     val deg: Int,
     @Json(name = "gust")
-    val gust: Double,
+    val gust: Double? = null,
     @Json(name = "speed")
     val speed: Double
 )

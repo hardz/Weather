@@ -11,19 +11,14 @@
         android:label="fragment_weather"
         tools:layout="@layout/fragment_weather">
         <action
-            android:id="@+id/action_weather_screen_to_city_picker_screen"
-            app:destination="@id/city_picker_screen"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            android:id="@+id/action_weather_screen_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/city_picker_screen"
-        android:name="com.test.currentweather.ui.CityPickerFragment"
-        android:label="fragment_city_picker"
-        tools:layout="@layout/fragment_city_picker">
-    </fragment>
+        android:id="@+id/settingsFragment"
+        android:name="com.test.currentweather.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

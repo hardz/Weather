@@ -1,19 +1,25 @@
-package com.test.weathersdk.model
+package com.test.currentweather.model
 
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class MainX(
+data class Main(
     @Json(name = "feels_like")
     val feelsLike: Double,
+    @Json(name = "grnd_level")
+    val grndLevel: Int? = null,
     @Json(name = "humidity")
     val humidity: Int,
     @Json(name = "pressure")
     val pressure: Int,
+    @Json(name = "sea_level")
+    val seaLevel: Int? = null,
     @Json(name = "temp")
     val temp: Double,
+    @Json(name = "temp_kf")
+    val tempKf: Double? = null,
     @Json(name = "temp_max")
     val tempMax: Double,
     @Json(name = "temp_min")
