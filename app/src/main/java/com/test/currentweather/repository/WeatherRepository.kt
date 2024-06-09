@@ -11,9 +11,9 @@ import retrofit2.Response
 class WeatherRepository {
     private val TAG: String = WeatherRepository::class.java.getSimpleName()
 
-    fun getWeatherbyGeoCode(lat :String, lon :String, appid :String, unit :String): MutableLiveData<WeatherResponse?> {
+    fun getWeatherByGeoCode(lat :String, lon :String, unit :String): MutableLiveData<WeatherResponse?> {
         val data: MutableLiveData<WeatherResponse?> = MutableLiveData<WeatherResponse?>()
-        WeatherService().weatherAPIRequest?.getWeatherbyGeoCode(lat, lon, appid, unit)?.enqueue(object : Callback<WeatherResponse> {
+        WeatherService().weatherAPIRequest?.getWeatherByGeoCode(lat, lon, unit)?.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
                 call: Call<WeatherResponse>,
                 response: Response<WeatherResponse>

@@ -7,11 +7,11 @@ import com.test.currentweather.model.WeatherResponse
 import com.test.currentweather.repository.WeatherRepository
 
 class WeatherViewModel : ViewModel(){
-    var weatherResponseLiveData: MutableLiveData<WeatherResponse?>? = null
+    private var weatherResponseLiveData: MutableLiveData<WeatherResponse?>? = null
 
-    fun getWeatherbyGeoCode(lat :String, lon: String, appid :String, unit :String): LiveData<WeatherResponse?>? {
+    fun getWeatherByGeoCode(lat :String, lon: String, unit :String): LiveData<WeatherResponse?>? {
         if (weatherResponseLiveData == null) {
-            weatherResponseLiveData = WeatherRepository().getWeatherbyGeoCode(lat, lon, appid, unit)
+            weatherResponseLiveData = WeatherRepository().getWeatherByGeoCode(lat, lon, unit)
         }
         return weatherResponseLiveData
     }

@@ -11,7 +11,7 @@ import com.test.currentweather.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val SPLASH_TIME_OUT = 1000L
     private var isKeepOn = false
 

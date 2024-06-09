@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -27,8 +27,6 @@ import com.test.currentweather.Constants
 import com.test.currentweather.R
 import com.test.currentweather.databinding.FragmentWeatherBinding
 import com.test.currentweather.model.Forecast
-import com.test.currentweather.model.ForecastResponse
-import com.test.currentweather.model.WeatherResponse
 import com.test.currentweather.viewmodels.ForecastViewModel
 import com.test.currentweather.viewmodels.WeatherViewModel
 
@@ -40,14 +38,14 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
     private lateinit var forecastViewModel: ForecastViewModel
     private lateinit var weatherViewModel: WeatherViewModel
 
-    var mFusedLocationClient: FusedLocationProviderClient? = null
+    private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var PERMISSION_ID = 44
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_weather, container, false)
         return mBinding.getRoot()
     }
@@ -60,7 +58,15 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
         forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
         weatherViewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
 
-        rvDayForecast = mBinding.rvDayForecast
+        setupForecastList()
+
+        mBinding.header.openSetting.setOnClickListener {
+            Navigation.findNavController(mBinding.root).navigate(WeatherFragmentDirections.actionWeatherFragmentToSettingsFragment())
+        }
+    }
+
+    private fun setupForecastList() {
+        rvDayForecast = mBinding.dayForecast
         val verticalPadding = resources.getDimensionPixelSize(R.dimen.album_list_padding_vertical)
         rvDayForecast.setPadding(0, verticalPadding, 0, verticalPadding)
         rvDayForecast.setClipToPadding(false)
@@ -68,7 +74,6 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
 
         daysForecastAdapter = DaysForecastAdapter(this)
         rvDayForecast.setAdapter(daysForecastAdapter)
-
     }
 
     override fun onResume() {
@@ -88,8 +93,8 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
                     val location = task.result
                     if (location != null) {
                         Log.e("DEBUG","Lat  --- " + location.latitude + "    Long  --- " + location.longitude)
-                        getForecastbyGeoCode(location.latitude, location.longitude)
-                        getCurrentWeatherbyGeoCode(location.latitude, location.longitude)
+                        getForecastByGeoCode(location.latitude, location.longitude)
+                        getCurrentWeatherByGeoCode(location.latitude, location.longitude)
                     }
                 }
             } else {
@@ -143,71 +148,76 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
         }
     }
 
-    private fun getCurrentWeatherbyGeoCode(latitude: Double, longitude: Double) {
-        weatherViewModel.getWeatherbyGeoCode(
+    private fun getCurrentWeatherByGeoCode(latitude: Double, longitude: Double) {
+        weatherViewModel.getWeatherByGeoCode(
             latitude.toString(),
             longitude.toString(),
-            Constants.API_KEY,
             Constants.TEMP_UNIT_METRIC
-        )!!.observe(viewLifecycleOwner, object : Observer<WeatherResponse?> {
-                override fun onChanged(weatherResponse: WeatherResponse?) {
-                    if (weatherResponse != null) {
-                        for (weather in weatherResponse.weather) {
-                            mBinding.txtWeatherType.setText(weather.main)
-                            mBinding.txtWeatherDes.setText(weather.description)
-                            Log.e("DEBUG", "Weather - ${weather.main}  ${weather.description}")
-                            Glide.with(mBinding.imgWeatherTypeIcon.getContext())
-                                .load(getWeatherIconURL(weather.icon))
-                                .into(mBinding.imgWeatherTypeIcon)
-                            break
-                        }
-                        mBinding.txtCityName.setText("${weatherResponse.name}")
-
-                        //Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-                        val temp = "${weatherResponse.main.temp}".substringBefore(".") + "°C"
-                        val feelsLike = "${weatherResponse.main.feelsLike}".substringBefore(".") + "°C"
-
-                        mBinding.txtTempOfCity.setText("${temp}")
-                        mBinding.txtTempOfCityDes.setText("feels Like ${feelsLike}")
-
-                        //Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
-                        mBinding.txtWindSpeed.setText("${weatherResponse.wind.speed} miles/hour")
-                        mBinding.txtHumidity.setText("${weatherResponse.main.humidity}%")
-
-//                    mBinding.txtSunrise.setText("${getFormattedDate(weatherResponse.sys.sunrise)}")
-//                    mBinding.txtSunset.setText("${getFormattedDate(weatherResponse.sys.sunset)}")
-                    }
+        )!!.observe(viewLifecycleOwner) { weatherResponse ->
+            if (weatherResponse != null) {
+                for (weather in weatherResponse.weather) {
+                    mBinding.weatherMainDetail.weatherType.text = weather.main
+                    mBinding.weatherMainDetail.weatherDescription.text = weather.description
+                    Glide.with(mBinding.weatherMainDetail.weatherTypeIcon.context)
+                        .load(getWeatherIconURL(weather.icon))
+                        .into(mBinding.weatherMainDetail.weatherTypeIcon)
+                    break
                 }
-            })
+                mBinding.header.cityName.text = weatherResponse.name
+
+                mBinding.weatherMainDetail.tempMaxMin.text = getString(
+                    R.string.temp_high_low,
+                    weatherResponse.main.tempMax.round(),
+                    weatherResponse.main.tempMin.round()
+                )
+                //Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+                val temp = weatherResponse.main.temp.round() + "°"
+                val feelsLike = "${weatherResponse.main.feelsLike}".substringBefore(".") + "°"
+
+                mBinding.weatherMainDetail.cityTemp.text = temp
+                mBinding.weatherMainDetail.cityTempDescription.text = "feels Like $feelsLike"
+
+                //Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+                mBinding.windHumidityDetail.txtWindSpeed.text = "${weatherResponse.wind.speed} miles/hour"
+                mBinding.windHumidityDetail.txtHumidity.text = "${weatherResponse.main.humidity}%"
+
+                //mBinding.txtSunrise.setText("${getFormattedDate(weatherResponse.sys.sunrise)}")
+                //mBinding.txtSunset.setText("${getFormattedDate(weatherResponse.sys.sunset)}")
+            }
+        }
     }
 
-    fun getWeatherIconURL(icon: String): String {
+    private fun Double.round(): String {
+        return kotlin.math.round(this).toString()
+    }
+
+    private fun getWeatherIconURL(icon: String): String {
         return "https://openweathermap.org/img/wn/${icon}@2x.png"
     }
 
-    private fun getForecastbyGeoCode(latitude: Double, longitude: Double) {
-        forecastViewModel.getForecastbyGeoCode(
+    private fun getForecastByGeoCode(latitude: Double, longitude: Double) {
+        forecastViewModel.getForecastByGeoCode(
             latitude.toString(),
             longitude.toString(),
-            Constants.API_KEY,
-            Constants.TEMP_UNIT_IMPERIAL
-        )!!.observe(viewLifecycleOwner, object : Observer<ForecastResponse?> {
-            override fun onChanged(forecastResponse: ForecastResponse?) {
-                if (forecastResponse != null) {
-                    Log.e("DEBUG","getForecastbyGeoCode  --- " + forecastResponse)
-                    val forecastlist: ArrayList<Forecast> = arrayListOf()
-                    var repeatedDate = "0"
-                    for (forecast in forecastResponse.list) {
-                        if (!repeatedDate.equals(forecast.dtTxt.split(" ")[0])) {
-                            Log.e("DEBUG","getForecastbyGeoCode  --- " + forecast.weather[0].description)
-                            forecastlist.add(forecast)
-                            repeatedDate = forecast.dtTxt.split(" ")[0]
-                        }
+            Constants.TEMP_UNIT_METRIC
+        )!!.observe(viewLifecycleOwner) { forecastResponse ->
+            if (forecastResponse != null) {
+                Log.e("DEBUG", "getForecastbyGeoCode  --- " + forecastResponse)
+                val forecastlist: ArrayList<Forecast> = arrayListOf()
+                var repeatedDate = "0"
+                for (forecast in forecastResponse.list) {
+                    if (!repeatedDate.equals(forecast.dtTxt.split(" ")[0])) {
+                        Log.e(
+                            "DEBUG",
+                            "getForecastbyGeoCode  --- " + forecast.weather[0].description
+                        )
+                        forecastlist.add(forecast)
+                        repeatedDate = forecast.dtTxt.split(" ")[0]
                     }
-                    daysForecastAdapter.submitList(forecastlist)
                 }
+                daysForecastAdapter.submitList(forecastlist)
             }
-        })
+        }
     }
 
     override fun onDayForecastClicked(view: View?, mForecast: Forecast?) {

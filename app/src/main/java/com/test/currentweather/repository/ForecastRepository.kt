@@ -9,24 +9,24 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ForecastRepository {
-    private val TAG: String = ForecastRepository::class.java.getSimpleName()
+    private val TAG: String = ForecastRepository::class.java.simpleName
 
-    fun getForecastbyGeoCode(lat :String, lon :String, appid :String, unit :String): MutableLiveData<ForecastResponse?>? {
+    fun getForecastByGeoCode(lat :String, lon :String, unit :String): MutableLiveData<ForecastResponse?>? {
         val data: MutableLiveData<ForecastResponse?> = MutableLiveData<ForecastResponse?>()
-        WeatherService().weatherAPIRequest?.getForecastbyGeoCode(lat, lon, appid, unit)?.enqueue(object : Callback<ForecastResponse> {
+        WeatherService().weatherAPIRequest?.getForecastByGeoCode(lat, lon, unit)?.enqueue(object : Callback<ForecastResponse> {
             override fun onResponse(
                 call: Call<ForecastResponse>,
                 response: Response<ForecastResponse>
             ) {
                 if (response.body() != null) {
                     Log.e(TAG, "onResponse - "+response.body())
-                    data.setValue(response.body())
+                    data.value = response.body()
                 }
             }
 
             override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
                 Log.e(TAG, "onFailure - ${t.message}")
-                data.setValue(null)
+                data.value = null
             }
 
         })
