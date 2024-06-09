@@ -1,7 +1,7 @@
 <h1 align="center">Current Weather</h1>
 
 <p align="center">  
-Current Weather is a small demo application based on modern Android tech-stacks especially focus on Jetpack using The Movie DB API. Also fetching data from the network.
+Current Weather is a small demo application based on modern Android tech-stacks especially focus on Jetpack using Weather API. Also fetching data from the network.
 </p>
 </br>
 
