@@ -26,7 +26,10 @@ import com.google.android.gms.location.LocationServices
 import com.test.currentweather.Constants
 import com.test.currentweather.R
 import com.test.currentweather.databinding.FragmentWeatherBinding
+import com.test.currentweather.extractDate
+import com.test.currentweather.getWeatherIconURL
 import com.test.currentweather.model.Forecast
+import com.test.currentweather.round
 import com.test.currentweather.viewmodels.ForecastViewModel
 import com.test.currentweather.viewmodels.WeatherViewModel
 
@@ -159,7 +162,7 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
                     mBinding.weatherMainDetail.weatherType.text = weather.main
                     mBinding.weatherMainDetail.weatherDescription.text = weather.description
                     Glide.with(mBinding.weatherMainDetail.weatherTypeIcon.context)
-                        .load(getWeatherIconURL(weather.icon))
+                        .load(weather.icon.getWeatherIconURL())
                         .into(mBinding.weatherMainDetail.weatherTypeIcon)
                     break
                 }
@@ -187,13 +190,9 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
         }
     }
 
-    private fun Double.round(): String {
-        return kotlin.math.round(this).toString()
-    }
 
-    private fun getWeatherIconURL(icon: String): String {
-        return "https://openweathermap.org/img/wn/${icon}@2x.png"
-    }
+
+
 
     private fun getForecastByGeoCode(latitude: Double, longitude: Double) {
         forecastViewModel.getForecastByGeoCode(
@@ -202,20 +201,19 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
             Constants.TEMP_UNIT_METRIC
         )!!.observe(viewLifecycleOwner) { forecastResponse ->
             if (forecastResponse != null) {
-                Log.e("DEBUG", "getForecastbyGeoCode  --- " + forecastResponse)
-                val forecastlist: ArrayList<Forecast> = arrayListOf()
-                var repeatedDate = "0"
-                for (forecast in forecastResponse.list) {
-                    if (!repeatedDate.equals(forecast.dtTxt.split(" ")[0])) {
-                        Log.e(
-                            "DEBUG",
-                            "getForecastbyGeoCode  --- " + forecast.weather[0].description
-                        )
-                        forecastlist.add(forecast)
-                        repeatedDate = forecast.dtTxt.split(" ")[0]
+                Log.e("DEBUG", "getForecastbyGeoCode  --- $forecastResponse")
+
+                // Filter and get forecasts with distinct dates
+                val distinctForecasts = forecastResponse.list
+                    .distinctBy {
+                        it.dtTxt.extractDate()
                     }
-                }
-                daysForecastAdapter.submitList(forecastlist)
+
+                /*val distinctForecasts = forecastResponse.list
+                    .groupBy { it.dtTxt.extractDate() }
+                    .map { (_, forecasts) -> forecasts.last() }*/
+
+                daysForecastAdapter.submitList(distinctForecasts)
             }
         }
     }
@@ -223,5 +221,4 @@ class WeatherFragment : Fragment(), DaysForecastAdapter.ForecastAdapterListener 
     override fun onDayForecastClicked(view: View?, mForecast: Forecast?) {
 
     }
-
 }

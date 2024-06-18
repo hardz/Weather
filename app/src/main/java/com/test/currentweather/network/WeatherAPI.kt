@@ -16,6 +16,7 @@ interface WeatherAPI {
 
     //5 day weather forecast
     //https://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&appid={API key}&units=imperial
+//    https://openweathermap.org/forecast5#5days
     @GET("forecast?appid=${BuildConfig.OPEN_WEATHER_API_KEY}")
     fun getForecastByGeoCode(@Query("lat") lat :String, @Query("lon") lon :String, @Query("units") unit :String) : Call<ForecastResponse>
 
