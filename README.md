@@ -20,15 +20,15 @@ weather_api_key=YOUR_API_KEY
 <img src="/previews/preview0.gif" align="right" width="32%"/>
 
 ## Tech stack & Open-source libraries
-- Minimum SDK level 21
-- 100% [Kotlin](https://kotlinlang.org/) based
-- JetPack
-  - ViewModel - UI related data holder, lifecycle aware.
-- Architecture
-  - MVVM Architecture (Declarative View - ViewModel - Model)
-  - Repository pattern
-- Material Design
-- [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs for network data.
+- 100% [Kotlin](https://kotlinlang.org/): A modern, expressive, and concise language.
+- Jetpack Libraries:
+  -  ViewModel: Manages UI-related data in a lifecycle-conscious way.
+  - LiveData: Observable data holder class for lifecycle-aware components.
+- Architecture:
+  - MVVM (Model-View-ViewModel): Separation of concerns with ViewModel handling UI logic.
+- Repository Pattern: Encapsulates data logic and business rules.
+- Material Design: Provides a consistent, clean UI and UX.
+- [Retrofit2 & OkHttp3](https://github.com/square/retrofit): Efficiently handles network operations for making API requests.
 
 
 # License
